@@ -21,7 +21,9 @@
         "--debug",
         "--verbose",
         "--path",
-        "${workspaceFolder}/project"
+        "${workspaceFolder}/project",
+        "--rendering-driver",
+        "opengl3"
       ],
       "cwd": "${workspaceFolder}",
       "visualizerFile": "${workspaceFolder}/extern/godot-engine/platform/windows/godot.natvis",
@@ -57,7 +59,9 @@
         "--debug",
         "--verbose",
         "--path",
-        "${workspaceFolder}/project"
+        "${workspaceFolder}/project",
+        "--rendering-driver",
+        "opengl3"
       ],
       "cwd": "${workspaceFolder}",
       "visualizerFile": "${workspaceFolder}/extern/godot-engine/platform/windows/godot.natvis",

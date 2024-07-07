@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlypne52r36w7"]
+
+[ext_resource type="Script" path="res://addons/WebUserInterface_Utils/webpack_dock/webpack_dock.gd" id="1_wd3ba"]
+[ext_resource type="Script" path="res://addons/WebUserInterface_Utils/webpack_dock/pathTextField.gd" id="2_3ms3m"]
+
+[node name="GridContainer" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_wd3ba")
+
+[node name="WebpackQuery" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="WebpackQuery"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "WebPack Status"
+
+[node name="QueryPIDButton" type="Button" parent="WebpackQuery"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Query PID"
+
+[node name="CurrentPidBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PidLabel" type="Label" parent="CurrentPidBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PID Label:"
+
+[node name="WebpackControlButtons" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="StartWebpack" type="Button" parent="WebpackControlButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start Webpack Server"
+
+[node name="StopWebpack" type="Button" parent="WebpackControlButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Stop Webpack Server"
+
+[node name="webpack Path" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="PathLabel" type="Label" parent="webpack Path"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Path:"
+
+[node name="pathTextField" type="HBoxContainer" parent="webpack Path"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_3ms3m")
+
+[node name="pathText" type="TextEdit" parent="webpack Path/pathTextField"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "res://html/"
+
+[node name="Button" type="Button" parent="webpack Path/pathTextField"]
+layout_mode = 2
+text = "Browse"
+
+[connection signal="pressed" from="WebpackQuery/QueryPIDButton" to="." method="get_pid_of_webpack_process"]
+[connection signal="pressed" from="WebpackControlButtons/StartWebpack" to="." method="start_webpack_server"]
+[connection signal="pressed" from="WebpackControlButtons/StopWebpack" to="." method="stop_webpack_server"]
+[connection signal="pressed" from="webpack Path/pathTextField/Button" to="webpack Path/pathTextField" method="show_dialog"]
