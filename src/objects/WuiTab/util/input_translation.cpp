@@ -204,16 +204,16 @@ namespace godot
             .type = wui::wui_key_event_type_t::KEYEVENT_RAWKEYDOWN,  // overwritten
             .modifiers = get_wui_key_modifier_mask(keyEvent),
             .windows_key_code = getWindows_key_code(keyEvent),
-            .native_key_code = keyEvent->get_physical_keycode(),
+            .native_key_code = static_cast<int>(keyEvent->get_unicode()),
             .is_system_key = false,
-            .character = (int)keyEvent->get_key_label(),
-            .unmodified_character = (int)keyEvent->get_key_label(),
+            .character = static_cast<char16_t>(keyEvent->get_unicode()),
+            .unmodified_character = static_cast<char16_t>(keyEvent->get_unicode()),
             .focus_on_editable_field = false,
         };
 
-        printf("Windows key code: %d\n Modifier mask 0x%X\n",
-               static_cast<int>(ret.windows_key_code), ret.modifiers);
-
+        /*    printf("Windows key code: %d\n Modifier mask 0x%X, unicode: 0x%X\n",
+                   static_cast<int>(ret.windows_key_code), ret.modifiers, keyEvent->get_unicode());
+    */
         return ret;
     }
 }
