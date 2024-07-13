@@ -2,6 +2,7 @@
 
 #include "input/webUiInput.hpp"
 #include "input/webUiInputKeyboardCodes.hpp"
+#define DEBUG_MODE 0
 
 namespace godot
 {

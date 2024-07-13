@@ -68,7 +68,7 @@ namespace godot
         if (keyEvent->get_keycode() == KEY_TAB)
             return 0x09;
 
-        godot::UtilityFunctions::print("Unknown unicode for key code for event", keyEvent);
+        // godot::UtilityFunctions::print("Unknown unicode for key code for event", keyEvent);
 
         return 0;
     }
@@ -87,10 +87,10 @@ namespace godot
             .unmodified_character = unicode,
             .focus_on_editable_field = false,
         };
-
+#if DEBUG_MODE
         printf("Windows key code: %d\n Modifier mask 0x%X, unicode: 0x%X\n\n",
                static_cast<int>(ret.windows_key_code), ret.modifiers, unicode);
-
+#endif
         return ret;
     }
 }

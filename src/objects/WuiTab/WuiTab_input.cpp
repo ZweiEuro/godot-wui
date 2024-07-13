@@ -104,7 +104,9 @@ namespace godot
         auto keyboardEvent = Object::cast_to<InputEventKey>(event.ptr());
         if (keyboardEvent != nullptr)
         {
+#if DEBUG_MODE
             printf("=====================================\n");
+#endif
             if (keyboardEvent->get_keycode() == KEY_CAPSLOCK)
                 is_capslock_pressed = keyboardEvent->is_pressed();
 
@@ -119,13 +121,16 @@ namespace godot
             // TODO: clean this up, technically more complex situations are possible
             // but a cleaner parser is required to get to CEF events.
 
+#if DEBUG_MODE
             UtilityFunctions::print("keyboard event", keyboardEvent);
-
+#endif
             auto wuiEvent = KeyEventToWuiKeyEvent(keyboardEvent);
 
             if (keyboardEvent->is_pressed())
             {
+#if DEBUG_MODE
                 printf("DOWN\n");
+#endif
                 if (keyboardEvent->is_echo())
                 {
                     wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
@@ -145,14 +150,17 @@ namespace godot
             }
             else
             {
+#if DEBUG_MODE
                 printf("UP\n");
+#endif
                 wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_KEYUP;
                 wuiTab->sendKeyEvent(wuiEvent);
             }
 
             accept_event();
+#if DEBUG_MODE
             printf("=====================================\n");
-
+#endif
             return;
         }
     }
