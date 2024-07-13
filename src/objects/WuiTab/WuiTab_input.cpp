@@ -104,6 +104,7 @@ namespace godot
         auto keyboardEvent = Object::cast_to<InputEventKey>(event.ptr());
         if (keyboardEvent != nullptr)
         {
+            printf("=====================================\n");
             if (keyboardEvent->get_keycode() == KEY_CAPSLOCK)
                 is_capslock_pressed = keyboardEvent->is_pressed();
 
@@ -123,6 +124,8 @@ namespace godot
             auto wuiEvent = KeyEventToWuiKeyEvent(keyboardEvent);
 
             if (keyboardEvent->is_pressed())
+            {
+                printf("DOWN\n");
                 if (keyboardEvent->is_echo())
                 {
                     wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
@@ -130,23 +133,26 @@ namespace godot
                 }
                 else
                 {
+                    wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_RAWKEYDOWN;
+                    wuiTab->sendKeyEvent(wuiEvent);
+
                     wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_KEYDOWN;
                     wuiTab->sendKeyEvent(wuiEvent);
 
-                    if ((keyboardEvent->get_keycode() & KEY_SPECIAL) == false)
-                    {
-                        // if a non special key is pressed we also send a char event
-                        wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
-                        wuiTab->sendKeyEvent(wuiEvent);
-                    }
+                    wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
+                    wuiTab->sendKeyEvent(wuiEvent);
                 }
+            }
             else
             {
+                printf("UP\n");
                 wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_KEYUP;
                 wuiTab->sendKeyEvent(wuiEvent);
             }
 
             accept_event();
+            printf("=====================================\n");
+
             return;
         }
     }
