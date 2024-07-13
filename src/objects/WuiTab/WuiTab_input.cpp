@@ -131,21 +131,34 @@ namespace godot
 #if DEBUG_MODE
                 printf("DOWN\n");
 #endif
+
                 if (keyboardEvent->is_echo())
                 {
-                    wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
+                    // on special keys, char won't do anything
+                    if (wuiEvent.character == 0)
+                        // for things like arrow buttons the keydown event is what makes them work
+                        // properly
+                        wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_KEYDOWN;
+                    else
+                        // chars can (in general) only be triggered by printable characters.
+                        wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
                     wuiTab->sendKeyEvent(wuiEvent);
                 }
                 else
                 {
-                    wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_RAWKEYDOWN;
-                    wuiTab->sendKeyEvent(wuiEvent);
+                    // we have RawKeyDown and KeyDown events.
+                    // A keydown should always be before a char event.
+                    // In the case of a special character that is non-printable the char event
+                    // should be ignored
 
                     wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_KEYDOWN;
                     wuiTab->sendKeyEvent(wuiEvent);
 
-                    wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
-                    wuiTab->sendKeyEvent(wuiEvent);
+                    if (wuiEvent.character != 0)
+                    {
+                        wuiEvent.type = wui::wui_key_event_type_t::KEYEVENT_CHAR;
+                        wuiTab->sendKeyEvent(wuiEvent);
+                    }
                 }
             }
             else
