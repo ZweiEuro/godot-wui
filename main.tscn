@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://fuf6lrdey7x2"]
+
+[ext_resource type="Script" path="res://objects/main.gd" id="1_n4fmn"]
+[ext_resource type="Script" path="res://scripts/WuiTab.gd" id="1_wey3x"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_51b0n"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bf5ye"]
+size = Vector2(2093, 63)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_n4fmn")
+
+[node name="WuiTab" type="WuiTab" parent="."]
+initialPath = "localhost:3000"
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 1416.0
+offset_bottom = 1080.0
+focus_mode = 2
+script = ExtResource("1_wey3x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(976, 1112)
+physics_material_override = SubResource("PhysicsMaterial_51b0n")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_bf5ye")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(968, -32)
+physics_material_override = SubResource("PhysicsMaterial_51b0n")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_bf5ye")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(1952, 736)
+rotation = 1.5708
+physics_material_override = SubResource("PhysicsMaterial_51b0n")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_bf5ye")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-32, 784)
+rotation = 1.5708
+physics_material_override = SubResource("PhysicsMaterial_51b0n")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_bf5ye")
+
+[connection signal="event_received" from="WuiTab" to="WuiTab" method="_on_event_received"]
+[connection signal="load_end" from="WuiTab" to="WuiTab" method="_on_load_end"]
