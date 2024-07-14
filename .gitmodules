@@ -1,0 +1,3 @@
+[submodule "html"]
+	path = html
+	url = git@gitlab.zweieuro.at:wui/html_ui/bouncing_objects.git
