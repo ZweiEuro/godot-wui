@@ -67,23 +67,21 @@ namespace godot
         };
 
         auto eventReceiver = [this](const wui::wui_tab_id_t tab_id, const std::string& eventName,
-                                    const cJSON* eventPayload, cJSON* successRetObj,
-                                    std::string& exception) {
+                                    const nlohmann::json& eventPayload,
+                                    nlohmann::json& successRetObj, std::string& exception) {
             // godot::UtilityFunctions::print("Event received: ", eventName.c_str());
 
             // convert the event payload to a dictionary
-            auto json_str = cJSON_PrintUnformatted(eventPayload);
+            auto json_str = eventPayload.dump(-1, ' ', true);
 
-            auto result = JSON::parse_string(json_str);
+            auto result = JSON::parse_string(json_str.c_str());
 
             if (result.get_type() != Variant::Type::DICTIONARY)
             {
-                godot::UtilityFunctions::print("Error parsing JSON: ", json_str);
-                std::free(json_str);
+                godot::UtilityFunctions::print("Error parsing JSON: ", json_str.c_str());
                 return -1;
             }
 
-            std::free(json_str);
             call_deferred("emit_signal", "event_received", eventName.c_str(), result);
             return 0;
         };

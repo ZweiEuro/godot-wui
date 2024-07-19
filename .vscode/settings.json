@@ -85,4 +85,7 @@
     "workbench.tree.renderIndentGuides": "always",
     "dotnet.defaultSolution": "disable",
     "svg.preview.background": "editor",
+    "cSpell.words": [
+        "libwui"
+    ],
 }

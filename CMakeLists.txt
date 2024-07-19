@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required(VERSION 3.20)
 
-set(GDEXTENSION_LIB_NAME roguelite)
+set(GDEXTENSION_LIB_NAME wui_godot)
 set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/project/bin")
 
 option(
@@ -190,10 +190,7 @@ set_target_properties(${PROJECT_NAME}
 )
 
 # add wui library
-add_subdirectory("extern/wui")
-
-# where the external deps are put
-wui_add_target(${PROJECT_NAME} "")
+add_subdirectory("extern")
 
 # =======================================================================
 # Print configuration report

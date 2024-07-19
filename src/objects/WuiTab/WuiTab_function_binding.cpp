@@ -51,21 +51,19 @@ namespace godot
         if (wuiTab == nullptr)
             godot::UtilityFunctions::print("Error sending event: no tab");
 
-        auto const jstr = JSON::stringify(eventPayload);
+        auto const json_str = JSON::stringify(eventPayload);
 
-        auto cjson = cJSON_Parse(jstr.utf8().get_data());
-        if (cjson == nullptr)
+        auto json = nlohmann::json::parse(json_str.utf8().get_data());
+        if (json == nullptr)
         {
             godot::UtilityFunctions::print("Error parsing json");
             return;
         }
 
-        const auto ret = wuiTab->sendEvent(eventName.utf8().get_data(), cjson);
+        const auto ret = wuiTab->sendEvent(eventName.utf8().get_data(), json);
 
         if (ret != wui::WUI_OK)
             godot::UtilityFunctions::print("Error sending event: ", ret);
-
-        cJSON_Delete(cjson);
     }
 
     // resize handler

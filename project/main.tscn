@@ -14,7 +14,7 @@ size = Vector2(2093, 63)
 script = ExtResource("1_n4fmn")
 
 [node name="WuiTab" type="WuiTab" parent="."]
-initialPath = "localhost:3000"
+initialPath = "http://localhost:3000"
 offset_left = -16.0
 offset_top = -8.0
 offset_right = 1416.0

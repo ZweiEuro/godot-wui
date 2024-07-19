@@ -1,14 +1,14 @@
 [configuration]
 
-entry_symbol = "example_library_init"
+entry_symbol = "wui_godot_lib_init"
 compatibility_minimum = 4.2
 reloadable = true
 
 [libraries]
 
-windows.debug.x86_64 = "res://bin/roguelite.windows.64.debug.dll"
-windows.release.x86_64 = "res://bin/roguelite.windows.64.release.dll"
-linux.debug.x86_64 = "res://bin/libroguelite.linux.64.debug.so"
-linux.release.x86_64 = "res://bin/libroguelite.linux.64.release.so"
-macos.debug = "res://bin/libroguelite.darwin.64.debug.dylib"
-macos.release = "res://bin/libroguelite.darwin.64.release.dylib"
+windows.debug.x86_64 = "res://bin/libwui_godot.windows.64.debug.dll"
+windows.release.x86_64 = "res://bin/libwui_godot.windows.64.release.dll"
+linux.debug.x86_64 = "res://bin/libwui_godot.linux.64.debug.so"
+linux.release.x86_64 = "res://bin/libwui_godot.linux.64.release.so"
+macos.debug = "res://bin/libwui_godot.darwin.64.debug.dylib"
+macos.release = "res://bin/libwui_godot.darwin.64.release.dylib"

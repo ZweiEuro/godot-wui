@@ -3,6 +3,7 @@
 .out/
 out/
 cmake-build-*/
+cef
 
 export.cfg
 export_presets.cfg

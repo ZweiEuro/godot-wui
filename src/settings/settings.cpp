@@ -64,7 +64,7 @@ namespace godot
                                    "DISABLED:0,ENABLED:1");
 
         // debugger port
-        add_custom_project_setting("Editor/remoteDebuggingPort", 8001,
+        add_custom_project_setting("Editor/remoteDebuggingPort", 8088,
                                    PropertyHint::PROPERTY_HINT_RANGE, "1025,65535,1");
 
         // in project
@@ -73,7 +73,7 @@ namespace godot
                                    "DISABLED:0,ENABLED:1");
 
         // debugger port
-        add_custom_project_setting("Project/remoteDebuggingPort", 8002,
+        add_custom_project_setting("Project/remoteDebuggingPort", 8089,
                                    PropertyHint::PROPERTY_HINT_RANGE, "1025,65535,1");
 
         // locale string
