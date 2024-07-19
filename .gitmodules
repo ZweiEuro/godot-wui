@@ -12,3 +12,6 @@
 [submodule "project/html"]
 	path = project/html
 	url = git@gitlab.zweieuro.at:wui/html_ui/bouncing_objects.git
+[submodule "extern/wui"]
+	path = extern/wui
+	url = git@gitlab.zweieuro.at:wui/core/web-user-interface-library.git
