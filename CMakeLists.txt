@@ -1,7 +1,6 @@
 ﻿cmake_minimum_required(VERSION 3.20)
 
 set(GDEXTENSION_LIB_NAME wui_godot)
-set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/project/bin")
 
 option(
     AUTOFORMAT_SRC_ON_CONFIGURE
@@ -14,6 +13,14 @@ option(
     "If enabled, ccache will be used to when building the project lib"
     ON
 )
+
+OPTION(BUILD_EXTENSION_STNADALONE "Compile standalone godot extension files" OFF)
+
+if(BUILD_EXTENSION_STNADALONE MATCHES OFF)
+    set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/project/bin")
+else()
+    set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/build")
+endif()
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_EXTENSIONS ON)
@@ -58,7 +65,12 @@ set(compiler_is_msvc "$<CXX_COMPILER_ID:MSVC>")
 # debbuging, and autocomplete/intellisense for any IDEs that
 # gather data from cmake (i.e. VSCode and Visual Studio 2022)
 # =======================================================================
-include(godot-dev-configuration)
+if(BUILD_EXTENSION_STNADALONE MATCHES OFF)
+    include(godot-dev-configuration)
+else()
+    # we still need this definition
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/extern/godot-cpp)
+endif()
 
 # =======================================================================
 # 3rd party library setup/configuration (leverages vcpkg)

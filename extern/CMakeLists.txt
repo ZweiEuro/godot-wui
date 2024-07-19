@@ -1,6 +1,12 @@
-set(I_AM_DEV true)
+set(I_AM_DEV false)
 
 if(I_AM_DEV)
+    execute_process(
+        COMMAND git submodule update --init wui
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMAND_ERROR_IS_FATAL ANY
+    )
+
     set(WUI_OUT_DIR ${GDEXTENSION_LIB_PATH} CACHE INTERNAL "")
     set(WUI_SKIP_HELPER_CMAKE true CACHE INTERNAL "")
     set(WUI_SKIP_INCLUDE_FILES true CACHE INTERNAL "")
@@ -31,7 +37,8 @@ else()
         # https://gitlab.zweieuro.at/wui/web-user-interface-library/-/releases
 
         # To get the most recent release
-        URL https://gitlab.zweieuro.at/wui/core/web-user-interface-library/-/releases/permalink/latest/downloads/ReleaseLinux.tar.gz
+        # URL https://gitlab.zweieuro.at/wui/core/web-user-interface-library/-/releases/permalink/latest/downloads/ReleaseLinux.tar.gz
+        URL http://localhost:8080/build/Release/Release_0.0.31_linux64.tar.gz
 
         # To get a specific release Version M.m.p (Major, minor, patch)
         # URL https://gitlab.zweieuro.at/wui/web-user-interface-library/-/releases/M.m.p/downloads/ReleaseLinux.tar.gz
